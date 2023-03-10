@@ -11,8 +11,8 @@ The building process is divided into 3 step:
 
 
 ## Updates
-20230310: finish biobert multiNERHead finetune and used it on my own corpus.
-20230224: finish data preparation.
+- 20230310: finish biobert multiNERHead finetune and used it on my own corpus.
+- 20230224: finish data preparation.
 
 ## Highlights
 
