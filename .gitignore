@@ -5,12 +5,20 @@ download/xrxiv/*
 # processed files
 data/textData/pubmed/.*
 data/textData/xrxiv/.*
-data/textData/merged/.*
 
 # data files
 *.jsonl
 *.gz.*
+*.pkl
 
+dataset/src
+dataset/processed
+
+# wandb
+wandb/
+
+# model
+exp/
 
 # Created by https://www.toptal.com/developers/gitignore/api/data,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=data,python

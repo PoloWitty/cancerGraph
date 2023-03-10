@@ -1,0 +1,3 @@
+tokenized_data.jsonl is the normal version
+tokenized_data2.jsonl is the version that only reserve pubdate[:4], namely only the year part. Because data from pubmed only has year, but data from xrxiv has year/month/day, and this will cause an error in pyarrow reading the jsonl file.
+tokenized_data3.jsonl is the version that reserve pubdate[:4] and remove Background/Purpose in the first word of abstract
