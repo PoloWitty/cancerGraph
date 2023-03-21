@@ -1,0 +1,13 @@
+name: bio_ner
+path: ../../dataset/processed/NER/
+data_class: TokenTagJson
+split:
+  train: train.json
+  val: dev.json
+  test: test.json
+language: en
+mapper:
+  Disease: Disease
+  Drug/Chem: Drug/Chem
+  Gene/Protein: Gene/Protein
+  Species: Species

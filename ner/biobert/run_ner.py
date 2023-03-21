@@ -23,6 +23,7 @@ Fine-tuning the library models for token classification.
 import logging
 import os
 import ipdb
+import pdb
 import sys
 from dataclasses import dataclass, field
 from typing import Optional
@@ -480,7 +481,10 @@ def main():
                 previous_word_idx = word_idx
 
             labels.append(label_ids)
-            entityTypeIds.append([model.config.entityType2id[examples['dataset_type'][i]]]*len(label_ids))
+            if data_args.dataset_name=='conll2003':
+                entityTypeIds.append([model.config.entityType2id['predict']]*len(label_ids))
+            else:
+                entityTypeIds.append([model.config.entityType2id[examples['dataset_type'][i]]]*len(label_ids))
         # entityTypeIds = [[int(e) for e in entityIds] for entityIds in entityTypeIds]
         tokenized_inputs["labels"] = labels
         tokenized_inputs["entity_type_ids"] = entityTypeIds
