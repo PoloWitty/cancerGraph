@@ -10,6 +10,8 @@ data/textData/xrxiv/.*
 *.jsonl
 *.gz.*
 *.pkl
+*.npy
+*.tsv
 
 dataset/src
 dataset/processed
