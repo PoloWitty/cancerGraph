@@ -19,6 +19,9 @@ dataset/processed
 # wandb
 wandb/
 
+# amlt folder
+aml/
+
 # model
 exp/
 
