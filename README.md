@@ -13,6 +13,7 @@ The building process is divided into 4 step:
 
 
 ## Updates
+- 20230413: finish postprocess
 - 20230407: finish OpenNRE re
 - 20230324: finish term clustering using CODER++
 - 20230317: finish UIE test
