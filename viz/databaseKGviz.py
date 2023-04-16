@@ -61,6 +61,13 @@ def queryCidDetail(tx,cid):
     ''',cid=cid)
     return result.single()
 
+def queryPaper(tx,pid):
+    result = tx.run('''
+        MATCH (p:Paper {pid:$pid})
+        RETURN p
+        ''',pid=pid)
+    return result.single()
+
 def queryEach(tx,srcId,tgtId):
     result = tx.run('''
     MATCH (a:Concept {cid:$srcId})-[r]->(b:Concept {cid:$tgtId})
@@ -68,6 +75,16 @@ def queryEach(tx,srcId,tgtId):
     ''',srcId=srcId,tgtId=tgtId)
     return [record for record in result]
 
+@st.cache_data(persist='disk')
+def get_mentionedPaper(pids:List[str]):
+    global driver
+    papers = []
+    with driver.session() as session:
+        for pid in pids:
+            record = session.execute_read(queryPaper,pid)
+            paper = json.loads(record['p']._properties['paper'])
+            papers.append(paper)
+    return papers
 
 @st.cache_data(persist='disk')
 def get_result(queryName,LIMIT_NUM):
@@ -302,12 +319,19 @@ if __name__=='__main__':
     with col0:
         queryName = st.text_input('Search Entity name','pancrea cancer',key='queryName')
         queryCid, nodes,links,nodeProp,srctgt2rel = get_result(queryName,LIMIT_NUM)
-        
     if queryCid==None:
         # no such entity
         with col1:
             st.error('No such Entity in the database.',icon='❌')
     else:
+        # get mentioned papers
+        pids = nodeProp[queryCid]['cluster'].get(queryName,nodeProp[queryCid]['cluster'][queryCid])
+        if len(pids)>=10:
+            end = 10
+        else:
+            end = -1
+        mentionedPapers = get_mentionedPaper(pids[:end])
+        
         # echarts setting
         options = construct_echart_settings(nodes,links)
         with col1:
@@ -315,11 +339,36 @@ if __name__=='__main__':
                 "click": "function(params){return params.data}", # minizie this use https://www.minifier.org/
             }
             clickEvent = st_echarts(options,events=event,height='500px')
+            
+            # viz mentioned papers
+            with st.container():
+                st.subheader('where is this entity mentioned')
+                for paper in mentionedPapers:
+                    with st.expander('Title: **'+' '.join(paper['title'])+'**'):
+                        # del paper['title']
+                        viz_abs = ''
+                        for token in paper['abstract']:
+                            if token.lower() != queryName.lower():
+                                viz_abs+= token + ' '
+                            else:
+                                viz_abs+= ':red['+token+'] '
+                                
+                        # st.markdown('- author: '+paper['authors'])
+                        # st.markdown('- journal: '+paper['journal'])
+                        # st.markdown('- pubYear: '+paper['pubdate'])
+                        st.markdown('- :green['+paper['authors']+' - '+paper['journal']+' - '+paper['pubdate']+']')
+                        if paper['doi']!='':
+                            st.markdown('- https://doi.org/'+paper['doi'])
+                        st.markdown('- abstract: '+viz_abs)
+                        # st.json(paper)
+                if len(pids)>=10:
+                    st.text('(More...)')
         with col0:
             st.subheader(queryName)
             st.caption('cid: '+queryCid)
             st.markdown('\[type\]: '+nodeProp[queryCid]['type'])
-            st.markdown('\[alias\]: '+",".join(nodeProp[queryCid]['cluster'].keys()))
+            alias_viz = lambda alias:', '.join(list(alias)[:30])+' (and more...)' if len(alias)>=50 else ', '.join(alias)
+            st.markdown('\[alias\]: '+alias_viz(nodeProp[queryCid]['cluster'].keys()))
             
         with col2:
             with st.expander('Feedback'):
@@ -337,7 +386,7 @@ if __name__=='__main__':
                     st.subheader(cid) 
                     st.caption('cid: '+cid)
                     st.markdown('\[type\]: '+nodeProp[cid]['type'])
-                    st.markdown('\[alias\]: '+",".join(nodeProp[cid]['cluster'].keys()))
+                    st.markdown('\[alias\]: '+alias_viz(nodeProp[cid]['cluster'].keys()))
                     st.button('click to display graph around '+cid,on_click=centerButtonHandler,kwargs={'name':cid})
         except AttributeError:
             pass
