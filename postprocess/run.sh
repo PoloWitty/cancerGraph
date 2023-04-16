@@ -9,3 +9,6 @@ python get_concept.py
 
 # generate corresponding paper file
 python get_papers.py
+
+# write headers
+bash write_headers.sh

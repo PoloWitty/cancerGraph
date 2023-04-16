@@ -6,6 +6,9 @@ download/xrxiv/*
 data/textData/pubmed/.*
 data/textData/xrxiv/.*
 
+# graphDB fils
+tmpData/
+
 # data files
 *.jsonl
 *.gz.*
