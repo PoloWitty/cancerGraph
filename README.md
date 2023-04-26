@@ -23,7 +23,7 @@ The building process is divided into 4 step:
 - 20230310: finish biobert multiNERHead finetune and used it on my own corpus.
 - 20230224: finish data preparation.
 
-## 
+## Details
 
 The KG is totally build **automatically** from pubmed and xrxiv papers.
 
