@@ -28,7 +28,7 @@ gdown --folder https://drive.google.com/drive/folders/1NPG-61qI8IoUQAqdHGAUJUrdp
 
 ## More: how to use google drive to upload data
 
-1. download gdrive3 (finish these [steps](https://github.com/glotlabs/gdrive/blob/main/docs/create_google_api_credentials.md) befrore do this)
+1. download gdrive3 (finish these [steps](https://github.com/glotlabs/gdrive/blob/main/docs/create_google_api_credentials.md) befrore doing this)
 
 note that gdrive2 will report an error
 

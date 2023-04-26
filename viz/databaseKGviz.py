@@ -317,7 +317,7 @@ if __name__=='__main__':
     col0,col1,col2 = st.columns([1.5,4,1.5])
     
     with col0:
-        queryName = st.text_input('Search Entity name','pancrea cancer',key='queryName')
+        queryName = st.text_input('Search Entity name','cancer',key='queryName')
         queryCid, nodes,links,nodeProp,srctgt2rel = get_result(queryName,LIMIT_NUM)
     if queryCid==None:
         # no such entity

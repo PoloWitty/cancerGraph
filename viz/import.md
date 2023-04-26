@@ -44,7 +44,7 @@ please copy and paste these cmd in bash and excute them one by one
             --relationships=Link=/import/triples_header.tsv,/import/triples_no_duplicate.tsv 
     ```
 
-4. create some index to accelerate search operation
+4. create some indexes to accelerate search operation
     
     start cypher-shell first
     ```bash

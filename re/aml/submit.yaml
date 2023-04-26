@@ -1,0 +1,277 @@
+description:  OpenNRE for cancerGraph
+
+target:
+  service: sing
+  # name: msrresrchvc
+  name: msroctovc
+  # run "pt target list amlk8s" to list the names of available AMLK8s targets
+  # or " amlt target info amlk8s"
+
+environment:
+  image: jinchaolove/dl:msra-torch1.12-conda3-cuda11.6-cudnn8-ubuntu20.04
+  # conda_yaml_file: $CONFIG_DIR/env.yaml
+  setup:
+    - export data_name_prefix='/blob/v-yanpeng/cancerGraph/ner/splits/biobert.jsonl'
+    - export output_name_prefix='/blob/v-yanpeng/cancerGraph/re/splits/data.jsonl'
+    - pushd OpenNRE;pip install -r requirements.txt;python setup.py install;popd
+    - pip install typer rich
+
+storage:
+  output:
+    storage_account_name: msralaphilly2
+    container_name: ml-la
+    mount_dir: /blob
+
+code:
+  # local directory of the code. this will be uploaded to the server.
+  # $CONFIG_DIR is expanded to the directory of this config file
+  local_dir: /home/v-yanpeng/cancerGraph/re
+
+# upload use amlt storage upload --config-file submit.yaml
+# check use amlt storage list v-yanpeng/cancerGraph/ner/splits/
+data:
+  remote_dir: v-yanpeng/cancerGraph/ner/
+  local_dir: /home/v-yanpeng/cancerGraph/data/textData/ner/splits
+
+jobs:
+  # generate from job_cmd.py
+  - name: cancerRE-0
+    sku: 1x G1
+    command:
+    - bash run.sh 0 8
+        
+  - name: cancerRE-1
+    sku: 1x G1
+    command:
+    - bash run.sh 1 8
+        
+  - name: cancerRE-2
+    sku: 1x G1
+    command:
+    - bash run.sh 2 8
+        
+  - name: cancerRE-3
+    sku: 1x G1
+    command:
+    - bash run.sh 3 8
+        
+  - name: cancerRE-4
+    sku: 1x G1
+    command:
+    - bash run.sh 4 8
+        
+  - name: cancerRE-5
+    sku: 1x G1
+    command:
+    - bash run.sh 5 8
+        
+  - name: cancerRE-6
+    sku: 1x G1
+    command:
+    - bash run.sh 6 8
+        
+  - name: cancerRE-7
+    sku: 1x G1
+    command:
+    - bash run.sh 7 8
+        
+  - name: cancerRE-8
+    sku: 1x G1
+    command:
+    - bash run.sh 8 8
+        
+  - name: cancerRE-9
+    sku: 1x G1
+    command:
+    - bash run.sh 9 8
+        
+  - name: cancerRE-10
+    sku: 1x G1
+    command:
+    - bash run.sh 10 8
+        
+  - name: cancerRE-11
+    sku: 1x G1
+    command:
+    - bash run.sh 11 8
+        
+  - name: cancerRE-12
+    sku: 1x G1
+    command:
+    - bash run.sh 12 8
+        
+  - name: cancerRE-13
+    sku: 1x G1
+    command:
+    - bash run.sh 13 8
+        
+  - name: cancerRE-14
+    sku: 1x G1
+    command:
+    - bash run.sh 14 8
+        
+  - name: cancerRE-15
+    sku: 1x G1
+    command:
+    - bash run.sh 15 8
+        
+  - name: cancerRE-16
+    sku: 1x G1
+    command:
+    - bash run.sh 16 8
+        
+  - name: cancerRE-17
+    sku: 1x G1
+    command:
+    - bash run.sh 17 8
+        
+  - name: cancerRE-18
+    sku: 1x G1
+    command:
+    - bash run.sh 18 8
+        
+  - name: cancerRE-19
+    sku: 1x G1
+    command:
+    - bash run.sh 19 8
+        
+  - name: cancerRE-20
+    sku: 1x G1
+    command:
+    - bash run.sh 20 8
+        
+  - name: cancerRE-21
+    sku: 1x G1
+    command:
+    - bash run.sh 21 8
+        
+  - name: cancerRE-22
+    sku: 1x G1
+    command:
+    - bash run.sh 22 8
+        
+  - name: cancerRE-23
+    sku: 1x G1
+    command:
+    - bash run.sh 23 8
+        
+  - name: cancerRE-24
+    sku: 1x G1
+    command:
+    - bash run.sh 24 8
+        
+  - name: cancerRE-25
+    sku: 1x G1
+    command:
+    - bash run.sh 25 8
+        
+  - name: cancerRE-26
+    sku: 1x G1
+    command:
+    - bash run.sh 26 8
+        
+  - name: cancerRE-27
+    sku: 1x G1
+    command:
+    - bash run.sh 27 8
+        
+  - name: cancerRE-28
+    sku: 1x G1
+    command:
+    - bash run.sh 28 8
+        
+  - name: cancerRE-29
+    sku: 1x G1
+    command:
+    - bash run.sh 29 8
+        
+  - name: cancerRE-30
+    sku: 1x G1
+    command:
+    - bash run.sh 30 8
+        
+  - name: cancerRE-31
+    sku: 1x G1
+    command:
+    - bash run.sh 31 8
+        
+  - name: cancerRE-32
+    sku: 1x G1
+    command:
+    - bash run.sh 32 8
+        
+  - name: cancerRE-33
+    sku: 1x G1
+    command:
+    - bash run.sh 33 8
+        
+  - name: cancerRE-34
+    sku: 1x G1
+    command:
+    - bash run.sh 34 8
+        
+  - name: cancerRE-35
+    sku: 1x G1
+    command:
+    - bash run.sh 35 8
+        
+  - name: cancerRE-36
+    sku: 1x G1
+    command:
+    - bash run.sh 36 8
+        
+  - name: cancerRE-37
+    sku: 1x G1
+    command:
+    - bash run.sh 37 8
+        
+  - name: cancerRE-38
+    sku: 1x G1
+    command:
+    - bash run.sh 38 8
+        
+  - name: cancerRE-39
+    sku: 1x G1
+    command:
+    - bash run.sh 39 8
+        
+  - name: cancerRE-40
+    sku: 1x G1
+    command:
+    - bash run.sh 40 8
+        
+  - name: cancerRE-41
+    sku: 1x G1
+    command:
+    - bash run.sh 41 8
+        
+  - name: cancerRE-42
+    sku: 1x G1
+    command:
+    - bash run.sh 42 8
+        
+  - name: cancerRE-43
+    sku: 1x G1
+    command:
+    - bash run.sh 43 8
+        
+  - name: cancerRE-44
+    sku: 1x G1
+    command:
+    - bash run.sh 44 8
+        
+  - name: cancerRE-45
+    sku: 1x G1
+    command:
+    - bash run.sh 45 8
+        
+  - name: cancerRE-46
+    sku: 1x G1
+    command:
+    - bash run.sh 46 8
+        
+  - name: cancerRE-47
+    sku: 1x G1
+    command:
+    - bash run.sh 47 8
+        

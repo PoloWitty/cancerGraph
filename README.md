@@ -23,7 +23,7 @@ The building process is divided into 4 step:
 - 20230310: finish biobert multiNERHead finetune and used it on my own corpus.
 - 20230224: finish data preparation.
 
-## Highlights
+## 
 
 The KG is totally build **automatically** from pubmed and xrxiv papers.
 
@@ -44,6 +44,8 @@ The following steps are just some post-process and viz using streamlit which I t
 1. create env using conda
     ```bash
     conda env create -f env.yaml
+    conda activate cancerGraph
+    python -m spacy download en_core_web_sm
     ```
 2. use gdown to download graphData into `data/graphData` folder
     ```bash
