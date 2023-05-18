@@ -4,7 +4,9 @@
 
 ![viz_demo](./README.asset/viz%20demo.png)
 
-Build a cancer-relatd Knowledge Graph from open source papers
+Build a cancer-relatd Knowledge Graph from open source papers.
+
+The final result contain 949,007 concept nodes and 4,766,994 triples. And the concept node will have a link to 1,023,966 paper nodes.
 
 The building process is divided into 4 step:
 

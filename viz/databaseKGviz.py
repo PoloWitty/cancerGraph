@@ -304,7 +304,7 @@ def construct_echart_settings(nodes:List,links:List):
 
 if __name__=='__main__':
     st.set_page_config(
-        page_title="DatabaseKG:v0",
+        page_title="cancerKG:v0",
         layout="wide",
         # initial_sidebar_state="expanded",
     )
@@ -324,6 +324,14 @@ if __name__=='__main__':
         with col1:
             st.error('No such Entity in the database.',icon='❌')
     else:
+        
+        with open('./linear_graph.log','a') as fp:
+            tmp = ''
+            for (src,tgt),rel in srctgt2rel.items():
+                tmp += f'({src},{rel[0]},{tgt})'
+            fp.write(f'{queryName}\n')
+            fp.write(tmp+'\n')
+
         # get mentioned papers
         pids = nodeProp[queryCid]['cluster'].get(queryName,nodeProp[queryCid]['cluster'][queryCid])
         if len(pids)>=10:

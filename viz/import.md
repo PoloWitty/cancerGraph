@@ -54,5 +54,6 @@ please copy and paste these cmd in bash and excute them one by one
     ```sql
     CREATE INDEX ON :Concept (cid);
     CREATE INDEX ON :Paper (pid);
+    SHOW INDEXES; # run this to check whether there is index on :Concept(cid) and :Paper(pid)
     :exit;
     ```
